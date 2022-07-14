@@ -9,6 +9,12 @@ class Customer extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nm_customer', 'alamat', 'nohp'
-    ];    
+        'id','nm_customer', 'alamat', 'nohp'
+    ];
+
+    public function salesorder()
+    {
+        return $this->hasMany(salesorder::class);
+    }
+
 }

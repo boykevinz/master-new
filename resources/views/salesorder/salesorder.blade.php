@@ -57,7 +57,7 @@
                     @forelse ($salesorders as $salesorder)                    
                   <tr>
                     <td>{{ $salesorder->tgl }}</td>
-                    <td>{{ $salesorder->nm_customer }}</td>
+                    <td>{{ $salesorder->customer->nm_customer }}</td>
                     <td>{{ $salesorder->produk }}</td>
                     <td>{{ $salesorder->qty }}</td>
                     <td>{{ $salesorder->hargasatuan }}</td>

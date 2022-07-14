@@ -1,6 +1,5 @@
 @include('header')
 
-
 @if (session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
@@ -12,6 +11,7 @@
     {{ session('error') }}
 </div>
 @endif
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -43,49 +43,98 @@
               </div>
               <!-- /.card-header -->
               <form action="{{ route('salesorder.store') }}" method="POST">
-                @csrf
+                @csrf                
               <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tanggal</label>
-                    <input name="tanggal" type="date" class="form-control form-control " id="exampleInputEmail1" placeholder="Nama Customer">
+                    <input name="tanggal" type="date" class="@error('tanggal') is-invalid @enderror form-control form-control @error('tgl') is-invalid @enderror" id="exampleInputEmail1" placeholder="Nama Customer">
+                                <!-- error message untuk tanggal -->
+                                @error('tanggal')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror                                  
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nama Customer</label>
                     {{-- <input name="nama_customer" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nama Customer"> --}}
-                    <select name="nama_customer" id="" class="form-control">
+                    <select name="id_customer" id="id_customer" class="form-control">
                       @forelse ($customers as $customer)
-                      <option value="{{ $customer->nm_customer; }}">{{ $customer->nm_customer; }}</option>
+                      <option value="{{ $customer->id; }}">{{ $customer->nm_customer; }}</option>
                       @empty
                       @endforelse
                     </select>
                     </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Produk</label>
-                    <select name="produk" id="" class="form-control">
-                      @forelse ($barangs as $barang)
-                      <option value="{{ $barang->nm_barang; }}">{{ $barang->nm_barang; }}</option>
-                      @empty
-                      @endforelse
-                    </select>                    
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Produk 1</label>
-                  <select name="produk1" id="" class="form-control">
-                    @forelse ($barangs as $barang)
-                    <option value="{{ $barang->nm_barang; }}">{{ $barang->nm_barang; }}</option>
-                    @empty
-                    @endforelse
-                  </select>                    
-              </div>                
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Qty</label>
-                    <input name="qty" type="text" class="form-control" id="exampleInputEmail1" placeholder="Stock Qty">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Harga Satuan</label>
-                    <input name="harga_satuan" type="text" class="form-control" id="exampleInputEmail1" placeholder="Harga Satuan">
-                </div>                        
-                <button type="submit" type="text" class="btn btn-primary">Submit</button>                                               
+                    {{-- row produk 1 --}}
+                 <div class="row">  
+                    <div class="form-group col-md-4">
+                        <label for="exampleInputEmail1">Produk</label>
+                        <select name="produk" id="" class="form-control">
+                          @forelse ($barangs as $barang)
+                          <option value="{{ $barang->nm_barang; }}">{{ $barang->nm_barang; }}</option>
+                          @empty
+                          @endforelse
+                        </select>                    
+                    </div>                
+                    <div class="form-group col-md-4">
+                        <label for="exampleInputEmail1">Qty</label>
+                        <input name="qty" type="text" class="@error('qty') is-invalid @enderror form-control" id="exampleInputEmail1" placeholder="Stock Qty">
+                        @error('qty')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>                    
+                    <div class="form-group col-md-4">
+                        <label for="exampleInputEmail1">Harga Satuan</label>
+                        <input name="harga_satuan" type="text" class="@error ('harga_satuan') is-invalid @enderror form-control" id="exampleInputEmail1" placeholder="Harga Satuan">
+                        @error('harga_satuan')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror                        
+                    </div>
+                  </div>
+                  
+                  {{-- row produk 2 --}}
+                  <div class="row">
+                      <div class="form-group col-md-4">
+                        <label for="exampleInputEmail1">Produk</label>
+                        <select name="produk2" id="" class="form-control">
+                          <option value=>pilih barang</option>
+                          @forelse ($barangs as $barang)
+                          <option value="{{ $barang->nm_barang; }}">{{ $barang->nm_barang; }}</option>
+                          @empty
+                          @endforelse
+                        </select>                    
+                    </div>                
+                    <div class="form-group col-md-4">
+                        <label for="exampleInputEmail1">Qty</label>
+                        <input name="qty2" type="text" class="form-control" id="exampleInputEmail1" placeholder="Stock Qty">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="exampleInputEmail1">Harga Satuan</label>
+                        <input name="harga_satuan2" type="text" class="form-control" id="exampleInputEmail1" placeholder="Harga Satuan">
+                    </div>
+                  </div>
+
+                  {{-- row produk 3 --}}
+                  <div class="row">
+                    <div class="form-group col-md-4">
+                      <label for="exampleInputEmail1">Produk</label>
+                      <select name="produk3" id="" class="form-control">
+                        <option value=>pilih barang</option>
+                        @forelse ($barangs as $barang)
+                        <option value="{{ $barang->nm_barang; }}">{{ $barang->nm_barang; }}</option>
+                        @empty
+                        @endforelse
+                      </select>                    
+                  </div>                
+                  <div class="form-group col-md-4">
+                      <label for="exampleInputEmail1">Qty</label>
+                      <input name="qty3" type="text" class="form-control" id="exampleInputEmail1" placeholder="Stock Qty">
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label for="exampleInputEmail1">Harga Satuan</label>
+                      <input name="harga_satuan3" type="text" class="form-control" id="exampleInputEmail1" placeholder="Harga Satuan">
+                  </div>
+                </div>                  
+                  <button type="submit" type="text" class="btn btn-primary">Submit</button>                                               
+                </div>                  
               </div>
                          
               </form>

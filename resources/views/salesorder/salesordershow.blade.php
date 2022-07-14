@@ -92,7 +92,55 @@
                       {{ old('nama_barang', $salesorder->hargasatuan) }}
                     </span>
                   </a>
-                </li>                         
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-success">
+                    Produk 2 :
+                    <span class="float-right text-success">
+                      {{ old('nama_barang', $salesorder->produk2) }}
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-success">
+                    Qty 2 :
+                    <span class="float-right text-success">
+                      {{ old('nama_barang', $salesorder->qty2) }}
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-success">
+                    Harga Satuan 2 :
+                    <span class="float-right text-success">
+                      {{ old('nama_barang', $salesorder->hargasatuan2) }}
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-danger">
+                    Produk 3 :
+                    <span class="float-right text-danger">
+                      {{ old('nama_barang', $salesorder->produk3) }}
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-danger">
+                    Qty 3 :
+                    <span class="float-right text-danger">
+                      {{ old('nama_barang', $salesorder->qty3) }}
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-danger">
+                    Harga Satuan 3 :
+                    <span class="float-right text-danger">
+                      {{ old('nama_barang', $salesorder->hargasatuan3) }}
+                    </span>
+                  </a>
+                </li>                                                         
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     Created At

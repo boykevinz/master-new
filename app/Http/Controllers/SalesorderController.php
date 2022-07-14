@@ -13,7 +13,7 @@ class SalesorderController extends Controller
 {
     public function index()
     {
-        $salesorders = salesorder::get();
+        $salesorders = salesorder::with('customer')->get();
         return view('salesorder.salesorder', compact('salesorders'));
     }
 
@@ -22,6 +22,7 @@ class SalesorderController extends Controller
 
         $customers = Customer::get();
         $barangs = Barang::get();
+        
 
         return view('salesorder.salesordercreate', compact('customers', 'barangs'));
         
@@ -30,25 +31,32 @@ class SalesorderController extends Controller
     {
         $this->validate($request, [
             
-            'nama_customer' => 'required',
+            'tanggal' => 'required',
+            'id_customer' => 'required',
             'produk' => 'required',
-            'qty' => 'required',
-            'harga_satuan' => 'required'
+            'qty' => 'required|max:3',
+            'harga_satuan' => 'required',
         ]);
 
         $salesorders = salesorder::create([
             'tgl' => $request->tanggal,
-            'nm_customer' => $request->nama_customer,
+            'id_customer' => $request->id_customer,
             'produk' => $request->produk,
             'qty' => $request->qty,
             'hargasatuan' => $request->harga_satuan,
+            'produk2' => $request->produk2,
+            'qty2' => $request->qty2,
+            'hargasatuan2' => $request->harga_satuan2,
+            'produk3' => $request->produk3,
+            'qty3' => $request->qty3,
+            'hargasatuan3' => $request->harga_satuan3,            
             
         ]);
         if ($salesorders) {
             return redirect()
                 ->route('salesorder.index')
                 ->with([
-                    'success' => 'Data Barang Telah Berhasil Di Tambahkan'
+                    'success' => 'Data Telah Berhasil Di Tambahkan'
                 ]);
         } else {
             return redirect()
@@ -69,14 +77,16 @@ class SalesorderController extends Controller
     public function edit($id)
     {
         $salesorder = salesorder::findOrFail($id);
-        return view('salesorder.salesorderedit', compact('salesorder'));
+        $customers = Customer::all();
+
+        return view('salesorder.salesorderedit', compact('salesorder', 'customers'));
     }
     
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'tanggal' => 'required',
-            'nama_customer' => 'required',
+            'id_customer' => 'required',
             'produk' => 'required',
             'qty' => 'required',
             'harga_satuan' => 'required',
@@ -86,10 +96,16 @@ class SalesorderController extends Controller
 
         $salesorders->update([
             'tgl' => $request->tanggal,
-            'nm_customer' => $request->nama_customer,
+            'id_customer' => $request->id_customer,
             'produk' => $request->produk,
             'qty' => $request->qty,
-            'hargasatuan' => $request->harga_satuan
+            'hargasatuan' => $request->harga_satuan,
+            'produk2' => $request->produk2,
+            'qty2' => $request->qty2,
+            'hargasatuan2' => $request->harga_satuan2,
+            'produk3' => $request->produk3,
+            'qty3' => $request->qty3,
+            'hargasatuan3' => $request->harga_satuan3   
         ]);
 
         if ($salesorders) {
@@ -101,7 +117,7 @@ class SalesorderController extends Controller
         } else {
             return redirect()
                 ->back()
-                ->withInput()
+                ->withInput()   
                 ->with([
                     'error' => 'Some problem has occured, please try again'
                 ]);

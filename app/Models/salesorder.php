@@ -9,8 +9,11 @@ class salesorder extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'tgl', 'nm_customer', 'produk', 'qty', 'hargasatuan'
+        'tgl', 'id_customer', 'produk', 'qty', 'hargasatuan', 'produk2', 'qty2', 'hargasatuan2', 'produk3', 'qty3', 'hargasatuan3'
     ];  
-
-
+    
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'id_customer')->withDefault(['nm_customer' => 'not found']);
+    }
 }
